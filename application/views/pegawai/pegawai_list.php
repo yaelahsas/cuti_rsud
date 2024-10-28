@@ -20,26 +20,20 @@
 				<table class="table table-bordered" id="mytable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
-							<thead>
-								<tr>
-									<th width="80px">No</th>
-									<th>Nama User</th> <!-- Menampilkan nama user -->
-									<th>Jabatan</th> <!-- Menampilkan nama jabatan -->
-									<th>Ruangan</th> <!-- Menampilkan nama ruangan -->
-									<th>NIP</th>
-									<th>Status Pegawai</th>
-									<th>Alamat</th>
-									<th>Tanggal Lahir</th>
-									<th>Jenis Kelamin</th>
-									<th>Telepon</th>
-									<th>Email</th>
-									<th width="200px">Action</th>
-								</tr>
-							</thead>
-
+							<th width="80px">No</th>
+							<th>Nama User</th> <!-- Menampilkan nama user -->
+							<th>Jabatan</th> <!-- Menampilkan nama jabatan -->
+							<th>Ruangan</th> <!-- Menampilkan nama ruangan -->
+							<th>NIP</th>
+							<th>Status Pegawai</th>
+							<th>Alamat</th>
+							<th>Tanggal Lahir</th>
+							<th>Jenis Kelamin</th>
+							<th>Telepon</th>
+							<th>Email</th>
+							<th width="200px">Action</th>
 						</tr>
 					</thead>
-
 				</table>
 			</div>
 		</div>
@@ -88,49 +82,47 @@
 				},
 				{
 					"data": "user_name", // Menggunakan kolom user_name dari hasil join
-				
+
 				},
 				{
 					"data": "nama_jabatan", // Menggunakan kolom nama_jabatan dari hasil join
-					
+
 				},
 				{
 					"data": "nama_ruangan", // Menggunakan kolom nama_ruangan dari hasil join
-					
+
 				},
 				{
 					"data": "nip",
-					
+
 				},
 				{
 					"data": "status_pegawai",
-			
+
 				},
 				{
 					"data": "alamat",
-					
+
 				},
 				{
 					"data": "tanggal_lahir",
-					
+
 				},
 				{
 					"data": "jenis_kelamin",
-					
+
 				},
 				{
 					"data": "telepon",
-					
+
 				},
 				{
 					"data": "email",
-					
+
 				},
 				{
 					"data": "action",
 					"orderable": false,
-					"className": "text-center",
-					"title": "Action"
 				}
 			],
 			order: [

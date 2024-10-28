@@ -14,6 +14,7 @@ class Pegawai extends CI_Controller
 
 		$this->load->model('Ruangan_model');  // Pastikan ada model Ruangan_model
 		$this->load->model('Jabatan_model');  // Pastikan ada model Jabatan_model
+		$this->load->model('Users_model');  // Pastikan ada model Jabatan_model
 	}
 
 	public function index()
@@ -72,7 +73,8 @@ class Pegawai extends CI_Controller
 			'telepon' => set_value('telepon'),
 			'email' => set_value('email'),
 			'jabatan_list' => $this->Jabatan_model->get_all(),  // Data Jabatan
-			'ruangan_list' => $this->Ruangan_model->get_all()   // Data Ruangan
+			'ruangan_list' => $this->Ruangan_model->get_all(),   // Data Ruangan
+			'user_list' => $this->Users_model->get_users_not_in_pegawai() // User yang belum ada di tabel pegawai
 		);
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
@@ -98,7 +100,7 @@ class Pegawai extends CI_Controller
 				'tanggal_lahir' => $this->input->post('tanggal_lahir', TRUE),
 				'jenis_kelamin' => $this->input->post('jenis_kelamin', TRUE),
 				'telepon' => $this->input->post('telepon', TRUE),
-				'email' => $this->input->post('email', TRUE),
+				// 'email' => $this->input->post('email', TRUE),
 			);
 
 			$this->Pegawai_model->insert($data);
@@ -110,6 +112,10 @@ class Pegawai extends CI_Controller
 	public function update($id)
 	{
 		$row = $this->Pegawai_model->get_by_id($id);
+		$user_list = $this->Users_model->get_users_not_in_pegawai();
+
+		// Ambil user yang sudah terhubung dengan pegawai yang di-update
+		$selected_user = $this->Users_model->get_by_id($row->id_user);
 
 		if ($row) {
 			$data = array(
@@ -127,7 +133,8 @@ class Pegawai extends CI_Controller
 				'telepon' => set_value('telepon', $row->telepon),
 				'email' => set_value('email', $row->email),
 				'jabatan_list' => $this->Jabatan_model->get_all(),  // Data Jabatan
-				'ruangan_list' => $this->Ruangan_model->get_all()   // Data Ruangan
+				'ruangan_list' => $this->Ruangan_model->get_all(),   // Data Ruangan
+				'user_list' => array_merge([$selected_user], $user_list) 
 			);
 			$this->load->view('template/header');
 			$this->load->view('template/sidebar');
@@ -157,7 +164,7 @@ class Pegawai extends CI_Controller
 				'tanggal_lahir' => $this->input->post('tanggal_lahir', TRUE),
 				'jenis_kelamin' => $this->input->post('jenis_kelamin', TRUE),
 				'telepon' => $this->input->post('telepon', TRUE),
-				'email' => $this->input->post('email', TRUE),
+				// 'email' => $this->input->post('email', TRUE),
 			);
 
 			$this->Pegawai_model->update($this->input->post('id', TRUE), $data);
@@ -191,7 +198,7 @@ class Pegawai extends CI_Controller
 		$this->form_validation->set_rules('tanggal_lahir', 'tanggal lahir', 'trim|required');
 		$this->form_validation->set_rules('jenis_kelamin', 'jenis kelamin', 'trim|required');
 		$this->form_validation->set_rules('telepon', 'telepon', 'trim|required');
-		$this->form_validation->set_rules('email', 'email', 'trim|required');
+		// $this->form_validation->set_rules('email', 'email', 'trim|required');
 
 		$this->form_validation->set_rules('id', 'id', 'trim');
 		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

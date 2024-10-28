@@ -39,6 +39,14 @@ class Users_model extends CI_Model
 		return $this->datatables->generate();
 	}
 
+	public function get_users_not_in_pegawai()
+{
+    $this->db->select('id, username');  // Pilih kolom sesuai kebutuhan
+    $this->db->from('users');
+    $this->db->where("id NOT IN (SELECT id_user FROM pegawai)", NULL, FALSE);
+    return $this->db->get()->result();
+}
+
 	// get all
 	function get_all()
 	{
