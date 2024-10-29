@@ -30,7 +30,7 @@
 				<a class="collapse-item" href="<?= site_url('Pegawai') ?>">Data Pegawai</a>
 				<a class="collapse-item" href="utilities-border.html">Data Pimpinan</a>
 				<a class="collapse-item" href="<?= site_url('Jenis_cuti') ?>">Data Jenis Cuti</a>
-				<a class="collapse-item" href="utilities-other.html">Data Cuti</a>
+				<a class="collapse-item" href="<?= site_url('Cuti') ?>">Data Cuti</a>
 				<a class="collapse-item" href="<?= site_url('Users') ?>">Data User</a>
 				<a class="collapse-item" href="<?= site_url('Ruangan') ?>">Data Ruangan</a>
 				<a class="collapse-item" href="<?= site_url('Jabatan') ?>">Data Jabatan</a>
