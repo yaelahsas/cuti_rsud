@@ -3,11 +3,15 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
+use Dompdf\Dompdf;
+
 class Cuti extends CI_Controller
 {
+
 	function __construct()
 	{
 		parent::__construct();
+		check_not_login();
 		$this->load->model('Cuti_model');
 		$this->load->library('form_validation');
 		$this->load->library('datatables');
@@ -197,6 +201,40 @@ class Cuti extends CI_Controller
 
 		$this->form_validation->set_rules('id', 'id', 'trim');
 		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+	}
+
+	public function generate_pdf()
+	{
+		// Data yang akan diinput (bisa diambil dari form)
+		$data = [
+			'tanggal' => '22 Desember 2023',
+			'nama' => 'Dhimas Panji Sastra',
+			'nip' => '123456789101112',
+			'jabatan' => 'Staff IT',
+			'masa_kerja' => '1 thn 10 bln',
+			'unit_kerja' => 'RSUD Genteng',
+			'jenis_cuti' => 'Cuti Tahunan',
+			'lama_cuti' => '10 Hari',
+			'tanggal_mulai' => '22 Desember 2023',
+			'tanggal_selesai' => '02 Januari 2024',
+			'alamat' => 'Jember',
+			'telepon' => '083853399847'
+		];
+
+		// Load view dan convert ke HTML
+		$html = $this->load->view('cuti/cuti_template', $data, TRUE);
+
+		// Create instance Dompdf
+		$dompdf = new Dompdf();
+		$dompdf->loadHtml($html);
+		// (Opsional) Mengatur ukuran kertas dan orientasi
+		$dompdf->setPaper('F4', 'portrait'); // 'portrait' atau 'landscape'
+
+		// Render PDF
+		$dompdf->render();
+
+		// Output the generated PDF (ke browser)
+		$dompdf->stream("Pengajuan_Cuti.pdf", array("Attachment" => false));
 	}
 }
 

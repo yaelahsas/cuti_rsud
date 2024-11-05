@@ -8,6 +8,7 @@ class Jenis_cuti extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		check_not_login();
 		$this->load->model('Jenis_cuti_model');
 		$this->load->library('form_validation');
 		$this->load->library('datatables');

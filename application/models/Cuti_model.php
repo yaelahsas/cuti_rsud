@@ -35,6 +35,32 @@ class Cuti_model extends CI_Model
 
 		return $this->datatables->generate();
 	}
+	public function json_pegawai()
+	{
+		// Mendapatkan id_user dari sesi login
+		$id_user = $this->session->userdata('user')->id;
+
+		$this->datatables->select('cuti.id, users.username as nama_user, jenis_cuti.nama_jenis_cuti, cuti.tanggal_pengajuan, cuti.tanggal_mulai, cuti.tanggal_selesai, cuti.lama_cuti, cuti.sisa_cuti, cuti.alasan, cuti.id_persetujuan, cuti.catatan_pimpinan');
+		$this->datatables->from('cuti');
+
+		// Join tabel 'users' dan 'jenis_cuti' dengan 'cuti'
+		$this->datatables->join('users', 'cuti.id_user = users.id', 'left');
+		$this->datatables->join('jenis_cuti', 'cuti.id_jenis_cuti = jenis_cuti.id', 'left');
+
+		// Menambahkan filter untuk hanya menampilkan data sesuai id_user yang sedang login
+		$this->datatables->where('cuti.id_user', $id_user);
+
+		// Menambahkan kolom 'action' dengan tombol Edit dan Delete
+		$this->datatables->add_column(
+			'action',
+			anchor(site_url('cuti/update/$1'), '<button class="btn btn-sm btn-success"><i class="fas fa-edit"></i> Edit</button>') . " " .
+				anchor(site_url('cuti/delete/$1'), '<button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>', 'onclick="return confirm(\'Are you sure?\')"'),
+			'id'
+		);
+
+		return $this->datatables->generate();
+	}
+
 
 
 	// get all

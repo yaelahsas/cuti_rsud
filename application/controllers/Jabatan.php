@@ -8,6 +8,7 @@ class Jabatan extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		check_not_login();
 		$this->load->model('Jabatan_model');
 		$this->load->library('form_validation');
 		$this->load->library('datatables');

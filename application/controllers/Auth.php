@@ -29,7 +29,13 @@ class Auth extends CI_Controller
 
 		if ($user) {
 			$this->session->set_userdata('user', $user);
-			redirect('Admin');
+			if ($user->id_role == 2) {
+				redirect('Admin');
+			} elseif ($user->id_role == 1) {
+				redirect('Dashboard/dashboard_pegawai');
+			} else {
+				redirect('Dashboard/dashboard_pimpinan');
+			}
 		} else {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Login failed. <br>Please check Username and Password!</div>');
 			redirect('auth');
@@ -55,8 +61,8 @@ class Auth extends CI_Controller
 	// Fungsi untuk logout
 	public function logout()
 	{
-		$params = array('id', 'name', 'level');
-		$this->session->unset_userdata($params);
+
+		$this->session->unset_userdata('user');
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You have been logged out!</div>');
 		redirect('Auth');
 	}

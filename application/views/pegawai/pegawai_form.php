@@ -51,8 +51,8 @@
 				<div class="form-group">
 					<label for="enum">Status Pegawai <?php echo form_error('status_pegawai') ?></label>
 					<select class="form-control" name="status_pegawai" id="status_pegawai">
-						<option value="aktif" <?php echo ($status_pegawai == 'aktif') ? 'selected' : ''; ?>>Tetap</option>
-						<option value="non-aktif" <?php echo ($status_pegawai == 'non-aktif') ? 'selected' : ''; ?>>THL</option>
+						<option value="Tetap" <?php echo ($status_pegawai == 'aktif') ? 'selected' : ''; ?>>Tetap</option>
+						<option value="THL" <?php echo ($status_pegawai == 'non-aktif') ? 'selected' : ''; ?>>THL</option>
 					</select>
 				</div>
 
@@ -69,8 +69,8 @@
 				<div class="form-group">
 					<label for="enum">Jenis Kelamin <?php echo form_error('jenis_kelamin') ?></label>
 					<select class="form-control" name="jenis_kelamin" id="jenis_kelamin">
-						<option value="L" <?php echo ($jenis_kelamin == 'Laki-Laki') ? 'selected' : ''; ?>>Laki-Laki</option>
-						<option value="P" <?php echo ($jenis_kelamin == 'Perempuan') ? 'selected' : ''; ?>>Perempuan</option>
+						<option value="Laki-lai" <?php echo ($jenis_kelamin == 'Laki-Laki') ? 'selected' : ''; ?>>Laki-Laki</option>
+						<option value="Perempuan" <?php echo ($jenis_kelamin == 'Perempuan') ? 'selected' : ''; ?>>Perempuan</option>
 					</select>
 				</div>
 

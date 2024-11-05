@@ -10,7 +10,7 @@ function check_login()
 function check_not_login()
 {
     $ci = &get_instance();
-    $user_session = $ci->session->userdata('id');
+    $user_session = $ci->session->userdata('user');
     if (!$user_session) { 
         redirect('Auth');
     }
