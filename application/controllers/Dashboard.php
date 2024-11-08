@@ -10,12 +10,13 @@ class Dashboard extends CI_Controller
 		check_not_login();
 		$this->load->library('datatables');
 		$this->load->model('Dashboard_model');
+		$this->load->model('Cuti_model');
 	}
 
 	public function json()
 	{
 		header('Content-Type: application/json');
-		echo $this->Dashboard_model->json();
+		echo $this->Cuti_model->json_pegawai();
 	}
 
 	public function dashboard_pegawai()
@@ -32,7 +33,7 @@ class Dashboard extends CI_Controller
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
 		$this->load->view('template/topbar');
-		$this->load->view('dashboard_pegawai');
+		$this->load->view('dashboard_pimpinan');
 		$this->load->view('template/footer');
 	}
 }

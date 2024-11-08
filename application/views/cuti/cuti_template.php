@@ -140,7 +140,7 @@
 	<div class="container">
 
 		<div class="atas">
-			<p> Banyuwangi, 22 Desember 2023
+			<p> Banyuwangi, <?= date('d F Y', strtotime($cuti->tanggal_pengajuan)) ?>
 			<p>Kepada
 				<br>Yth. Direktur RSUD Genteng
 				<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;di - <?= "\n" ?>
@@ -157,13 +157,13 @@
 			</tr>
 			<tr>
 				<td class="cell3">Nama</td>
-				<td class="cell1">Dhimas Panji Sastra</td>
+				<td class="cell1"><?= $cuti->nama_pengaju  ?></td>
 				<td>NIP</td>
-				<td>123456789101112</td>
+				<td><?= $cuti->nip_pengaju  ?></td>
 			</tr>
 			<tr>
 				<td>Jabatan</td>
-				<td>Staff IT</td>
+				<td><?= $cuti->jabatan_pengaju  ?></td>
 				<td>Masa Kerja</td>
 				<td>1 thn 10 bln</td>
 			</tr>
@@ -207,6 +207,7 @@
 			<tr>
 				<td>
 					<br>
+					<?= $cuti->alasan  ?>
 					<br>
 				</td>
 			</tr>
@@ -228,13 +229,13 @@
 					Mulai Tanggal
 				</td>
 				<td>
-					22 Desember 2023
+				<?= date('d F Y', strtotime($cuti->tanggal_mulai)) ?>
 				</td>
 				<td class="jenis">
 					s/d
 				</td>
 				<td>
-					02 Januari 2024
+				<?= date('d F Y', strtotime($cuti->tanggal_selesai)) ?>
 				</td>
 			</tr>
 		</table>
@@ -348,17 +349,17 @@
 					<br>
 					<br />
 					<br />
-					<u>Dhimas Panji Sastra, A.md</u>
-					<br>123456789101212
+					<u><?= $cuti->nama_pengaju  ?></u>
+					<br><?= $cuti->nip_pengaju  ?>
 				</td>
 
 			</tr>
 			<tr>
 				<td class="ttd">
-					Jember
+				<?= $cuti->alamat  ?>
 				</td>
 				<td class="ttd">
-					083853399847
+				<?= $cuti->telepon  ?>
 				</td>
 
 
@@ -408,9 +409,10 @@
 					<br />
 					<br />
 					<br />
-					<u>INDAH WAHYUNINGSIH, A.Md.Keb</u>
+					<u><?= $cuti->nama_pimpinan1  ?></u>
 					<br />
-					NIP. 198104262002122004
+					NIP. <?= $cuti->nip_pimpinan1  ?>
+
 				</td>
 				<td>
 					Kepala Subbag/ Seksi
@@ -420,10 +422,10 @@
 					<br />
 					<br />
 					<br />
-					<u>KN TJATUR W., S.Kep.Ns
+					<u><?= $cuti->nama_pimpinan2  ?></u>
 					</u>
 					<br />
-					NIP. 198104262002122004
+					NIP. <?= $cuti->nip_pimpinan2  ?>
 				</td>
 				<td>
 					Kepala Bidang Pelayanan
@@ -433,9 +435,9 @@
 					<br />
 					<br />
 					<br />
-					<u>dr. RUDI HARTAWAN</u>
+					<u><?= $cuti->nama_pimpinan3  ?></u>
 					<br />
-					NIP. 198104262002122004
+					NIP. <?= $cuti->nip_pimpinan3  ?>
 				</td>
 
 

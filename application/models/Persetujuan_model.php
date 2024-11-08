@@ -53,6 +53,27 @@ class Persetujuan_model extends CI_Model
 		$result = $this->db->query($query, [$user_id]);
 		return $result->result(); // Mengembalikan array hasil query
 	}
+	public function get_cuti_by_pegawai($user_id)
+	{
+		// Query untuk mengambil data cuti yang diajukan oleh pegawai tertentu
+		// Query untuk menghitung jumlah cuti dengan status "pending" dari pimpinan1, pimpinan2, atau pimpinan3
+		$query = "
+			SELECT COUNT(*) AS pending_count
+			FROM pegawai p
+			JOIN cuti c ON p.id = c.id_user
+			JOIN persetujuan ps ON ps.id = c.id_persetujuan
+			WHERE p.id_user = ?
+				AND (ps.status_pimpinan1 = 'pending' 
+					OR ps.status_pimpinan2 = 'pending' 
+					OR ps.status_pimpinan3 = 'pending')
+		
+		";
+
+		// Jalankan query dan ambil hasilnya
+		$result = $this->db->query($query, [$user_id]);
+		return $result->result(); // Mengembalikan array hasil query
+	}
+
 	private function is_pimpinan1($user_id)
 	{
 		$this->db->where('users.id', $user_id); // Spesifik untuk id tabel users

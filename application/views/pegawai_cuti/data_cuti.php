@@ -19,15 +19,15 @@
 					<thead>
 						<tr>
 							<th width="40px">No</th>
-							<th>Id User</th>
-							<th>Id Jenis Cuti</th>
+							<th>Nama</th>
+							<th>Jenis Cuti</th>
 							<th>Tanggal Pengajuan</th>
 							<th>Tanggal Mulai</th>
 							<th>Tanggal Selesai</th>
 							<th>Lama Cuti</th>
 							<th>Sisa Cuti</th>
 							<th>Alasan</th>
-							<th>Id Persetujuan</th>
+							<th>Status pengajuan</th>
 							<th>Catatan Pimpinan</th>
 							<th width="120px">Action</th>
 						</tr>
@@ -97,7 +97,7 @@
 				}, {
 					"data": "alasan"
 				}, {
-					"data": "id_persetujuan"
+					"data": "status_pengajuan"
 				}, {
 					"data": "catatan_pimpinan"
 				},

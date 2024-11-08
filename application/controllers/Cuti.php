@@ -58,6 +58,71 @@ class Cuti extends CI_Controller
 		}
 	}
 
+	public function cetak($id)
+	{
+		// Ambil data cuti berdasarkan ID
+		$data['cuti'] = $this->Cuti_model->get_cuti_by_id($id); // Asumsikan ada fungsi untuk mengambil data cuti berdasarkan ID
+	
+		// Load library dompdf
+		$this->load->library('pdf');
+
+		// Buat view untuk PDF dan masukkan data cuti
+		$html = $this->load->view('cuti/pdf_template', $data, true);
+
+		// Buat PDF
+		$this->pdf->loadHtml($html);
+		$this->pdf->setPaper('A4', 'portrait');
+		$this->pdf->render();
+
+		// Unduh PDF dengan nama file tertentu
+		$this->pdf->stream("cuti_" . $id . ".pdf", array("Attachment" => 1));
+	}
+
+
+	public function get_cuti_detail($cuti_id)
+	{
+		$this->db->select('cuti.*, users.username AS nama_user, jenis_cuti.nama_jenis_cuti, ps.status_pimpinan1, ps.status_pimpinan2, ps.status_pimpinan3');
+		$this->db->from('cuti');
+		$this->db->join('users', 'cuti.id_user = users.id', 'left');
+		$this->db->join('jenis_cuti', 'cuti.id_jenis_cuti = jenis_cuti.id', 'left');
+		$this->db->join('persetujuan ps', 'cuti.id_persetujuan = ps.id', 'left');
+		$this->db->where('cuti.id', $cuti_id);
+
+		$data = $this->db->get()->row();
+
+		if ($data) {
+			// Return HTML detail cuti sebagai response
+			echo '<p><strong>Nama User:</strong> ' . $data->nama_user . '</p>';
+			echo '<p><strong>Jenis Cuti:</strong> ' . $data->nama_jenis_cuti . '</p>';
+			echo '<p><strong>Alasan:</strong> ' . $data->alasan . '</p>';
+			echo '<p><strong>Status Pimpinan 1:</strong> ' . $data->status_pimpinan1 . '</p>';
+			echo '<p><strong>Status Pimpinan 2:</strong> ' . $data->status_pimpinan2 . '</p>';
+			echo '<p><strong>Status Pimpinan 3:</strong> ' . $data->status_pimpinan3 . '</p>';
+		} else {
+			echo '<p>Detail cuti tidak ditemukan.</p>';
+		}
+	}
+
+	public function detail($cuti_id) {
+        $data['cuti'] = $this->Cuti_model->get_cuti_by_id($cuti_id);
+
+     // Load view dan convert ke HTML
+		$html = $this->load->view('cuti/cuti_template', $data, TRUE);
+
+		// Create instance Dompdf
+		$dompdf = new Dompdf();
+		$dompdf->loadHtml($html);
+		// (Opsional) Mengatur ukuran kertas dan orientasi
+		$dompdf->setPaper('F4', 'portrait'); // 'portrait' atau 'landscape'
+
+		// Render PDF
+		$dompdf->render();
+
+		// Output the generated PDF (ke browser)
+		$dompdf->stream("Pengajuan_Cuti.pdf", array("Attachment" => false));
+    }
+
+
 	public function create()
 	{
 		// Ambil data users dan jenis cuti dari model terkait

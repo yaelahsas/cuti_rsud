@@ -19,7 +19,13 @@ class Fungsi
 	{
 		$this->ci->load->model('Persetujuan_model');
 		$user_id = $this->ci->session->userdata('user')->id; // ID user dari session
-		$pending_cuti = $this->ci->Persetujuan_model->get_pending_cuti_by_pimpinan($user_id);
+		if ($this->ci->session->userdata('user')->id_role == 1){
+			$pending_cuti = $this->ci->Persetujuan_model->get_cuti_by_pegawai($user_id);
+
+		}elseif ($this->ci->session->userdata('user')->id_role == 2){
+			$pending_cuti = $this->ci->Persetujuan_model->get_pending_cuti_by_pimpinan($user_id);
+		}
+		
 		// Set data notifikasi global
 		$data['notif_count'] = count($pending_cuti);
 		$data['pending_cuti'] = $pending_cuti;

@@ -38,8 +38,13 @@
 										</div>
 									</div>
 									<div>
-									<div class="small text-gray-500"><?= date('j F Y', strtotime($approval->cuti_pengajuan)); ?></div>
-										<span class="font-weight-bold"><?= $approval->nama_user; ?> mengajukan cuti</span>
+										<?php if ($this->session->userdata('user')->id_role == 1): ?>
+
+											<span class="font-weight-bold">Anda mempunyai cuti pending</span>
+										<?php else: ?>
+											<div class="small text-gray-500"><?= date('j F Y', strtotime($approval->cuti_pengajuan)); ?></div>
+											<span class="font-weight-bold"><?= $approval->nama_user; ?> mengajukan cuti</span>
+										<?php endif; ?>
 									</div>
 								</a>
 							<?php endforeach; ?>

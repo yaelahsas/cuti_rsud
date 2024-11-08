@@ -38,8 +38,7 @@ class Dashboard_model extends CI_Model
 		// Menambahkan kolom 'action' dengan tombol Edit dan Delete
 		$this->datatables->add_column(
 			'action',
-			anchor(site_url('cuti/update/$1'), '<button class="btn btn-sm btn-success"><i class="fas fa-edit"></i> Edit</button>') . " " .
-				anchor(site_url('cuti/delete/$1'), '<button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>', 'onclick="return confirm(\'Are you sure?\')"'),
+			'<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#detailModal" onclick="showDetail($1)"><i class="fas fa-info-circle"></i> Detail</button>',
 			'id'
 		);
 
